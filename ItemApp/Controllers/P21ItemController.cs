@@ -34,7 +34,8 @@ namespace ItemApp.Controllers
             }
 
             var p21Item = await _context.P21Item
-                .FirstOrDefaultAsync(m => m.ID == id);
+                 .Include(s => s.Images)
+                .FirstOrDefaultAsync(m => m.inv_mast_uid == id);
             if (p21Item == null)
             {
                 return NotFound();
@@ -88,7 +89,7 @@ namespace ItemApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,inv_mast_uid,ItemID,Description,ExtendedDescription,PrimaryBin")] P21Item p21Item)
         {
-            if (id != p21Item.ID)
+            if (id != p21Item.inv_mast_uid)
             {
                 return NotFound();
             }
@@ -102,7 +103,7 @@ namespace ItemApp.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!P21ItemExists(p21Item.ID))
+                    if (!P21ItemExists(p21Item.inv_mast_uid))
                     {
                         return NotFound();
                     }
@@ -125,7 +126,7 @@ namespace ItemApp.Controllers
             }
 
             var p21Item = await _context.P21Item
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.inv_mast_uid == id);
             if (p21Item == null)
             {
                 return NotFound();
@@ -147,7 +148,7 @@ namespace ItemApp.Controllers
 
         private bool P21ItemExists(int id)
         {
-            return _context.P21Item.Any(e => e.ID == id);
+            return _context.P21Item.Any(e => e.inv_mast_uid == id);
         }
     }
 }

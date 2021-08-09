@@ -19,9 +19,9 @@
 {
 <div class="card">
     <div class="card-header">
-        <span><a asp-action="Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.ItemID)</a></span>
+        <span><a asp-action="Details" asp-route-id="@item.inv_mast_uid">@Html.DisplayFor(modelItem => item.ItemID)</a></span>
         <span style="float:right">
-            <a asp-action="AddImage" asp-route-P21ItemID="@item.ID"><i style="font-size:larger" class="bi bi-card-image"></i></a>
+            <a asp-action="AddImage" asp-route-P21ItemID="@item.inv_mast_uid"><i style="font-size:larger" class="bi bi-card-image"></i></a>
         </span>
     </div>
     <div class="card-body">

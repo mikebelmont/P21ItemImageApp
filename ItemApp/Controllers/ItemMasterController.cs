@@ -38,7 +38,7 @@ namespace ItemApp.Controllers
             else
             {
                 items = items
-                    .Where(i => i.ID == 0);
+                    .Where(i => i.inv_mast_uid == 0);
             }
             return View(await items.ToListAsync());
         }
@@ -56,7 +56,7 @@ namespace ItemApp.Controllers
             else
             {
                 items = items
-                    .Where(i => i.ID == 0);
+                    .Where(i => i.inv_mast_uid == 0);
             }
             return View(await items.ToListAsync());
         }
@@ -81,10 +81,10 @@ namespace ItemApp.Controllers
                 }
 
                 int numberOfImages = _context.P21Item
-                 .Include(s => s.Images).Where(m => m.ID == image.P21ItemID).SelectMany(o => o.Images).Count();
+                 .Include(s => s.Images).Where(m => m.inv_mast_uid == image.P21ItemID).SelectMany(o => o.Images).Count();
                 numberOfImages += numberOfImages;
 
-                var p21item = _context.P21Item.Where(m => m.ID == image.P21ItemID).FirstOrDefault();
+                var p21item = _context.P21Item.Where(m => m.inv_mast_uid == image.P21ItemID).FirstOrDefault();
                 var P21ItemName = p21item.inv_mast_uid.ToString();
 
                 string wwwRootPath = _webHostEnvironment.WebRootPath;
@@ -131,7 +131,7 @@ namespace ItemApp.Controllers
             var P21Items = await _context.P21Item
                  .Include(s => s.Images)
                  .AsNoTracking()
-                 .FirstOrDefaultAsync(m => m.ID == id);
+                 .FirstOrDefaultAsync(m => m.inv_mast_uid == id);
 
             if (P21Items == null)
             {

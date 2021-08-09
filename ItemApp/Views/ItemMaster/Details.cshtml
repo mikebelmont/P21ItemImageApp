@@ -1,0 +1,38 @@
+﻿@model ItemApp.Models.P21Item
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+
+
+<div>
+    <hr />
+    <div class="card">
+        <div class="card-header">
+            <p>
+                <span>@Html.DisplayFor(model => model.ItemID)</span><span> ( @Html.DisplayFor(model => model.inv_mast_uid) ) </span>
+                <span style="float:right">
+                    <a asp-action="AddImage" asp-route-P21ItemID="@Model.ID"><i style="font-size:larger" class="bi bi-card-image"></i></a>
+                </span>
+            </p>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">@Html.DisplayFor(model => model.Description)</h5>
+            
+            <ul class="list-group list-group-flush">
+                @foreach (var item in Model.Images)
+                {
+                    <li class="list-group-item">
+                        <img class="img-fluid" src="~/images/@item.ImageLocation" asp-append-version="true" />
+                        <a asp-action="Delete" asp-controller="Images" asp-route-id="@item.ID" class="btn btn-outline-danger">Delete</a>
+                    </li>
+                    }
+                </ul>
+        </div>
+        <div class="card-footer">
+            @Html.DisplayFor(model => model.PrimaryBin)
+        </div>
+    </div>
+</div>
